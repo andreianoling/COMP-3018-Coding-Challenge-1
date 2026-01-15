@@ -8,7 +8,8 @@
   },
   "scripts": {
     "start": "ts-node src/server.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -27,5 +28,13 @@
   },
   "dependencies": {
     "express": "^5.2.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andreianoling/COMP-3018-Coding-Challenge-1.git"
+  },
+  "bugs": {
+    "url": "https://github.com/andreianoling/COMP-3018-Coding-Challenge-1/issues"
+  },
+  "homepage": "https://github.com/andreianoling/COMP-3018-Coding-Challenge-1#readme"
 }

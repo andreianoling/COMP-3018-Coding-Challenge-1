@@ -1,4 +1,5 @@
 import express, { Express } from "express";
+import { players, Rating, getPlayersById } from "./services/playerService";
 
 // Initialize Express application
 const app: Express = express();
@@ -7,10 +8,6 @@ const app: Express = express();
 app.get("/", (req, res) => {
     res.send("Hello, World!");
 });
-
-
-
-export default app;
 
 app.get("/api/v1/health", (req, res) => {
     res.json({
@@ -21,16 +18,29 @@ app.get("/api/v1/health", (req, res) => {
     });
 });
 
-import { players, Rating } from "./services/playerService";
-
 app.get("/api/v1/players", (req, res) => {
-    res.json(players);
+    res.json({
+        count: players.length,
+        players
+    })
 });
 
 app.get("/api/v1/players/:id", (req, res) => {
-    res.json(players.id)
+    const player = getPlayersById(Number(req.params.id));
+    if (!player) {
+        res.status(404).json({ error: "Player not found" });
+        return;
+    }
+    res.json(player);
 });
 
 app.get("/api/v1/players/:id/rating", (req, res) => {
-    res.json(Rating(players.id))
+    const player = getPlayersById(Number(req.params.id));
+    if (!player) {
+        res.status(404).json({ error: "Player not found" });
+        return;
+    }
+    res.json({ rating: Rating(player) });
 });
+
+export default app;
